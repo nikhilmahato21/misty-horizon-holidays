@@ -543,7 +543,7 @@ const DestinationsSection = () => {
                   </div>
 
                   <motion.a
-                    href={`https://wa.me/917384853108?text=${encodeURIComponent(`Hi Misty Horizon, I'm interested in exploring ${dest.name}. Please share package details and pricing.`)}`}
+                    href={`https://wa.me/917384853108?text=${encodeURIComponent(`Hi Misty Horizon Holidays, I'm interested in exploring ${dest.name}. Please share package details and pricing.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-[#25D366] text-white font-bold py-3 px-6 rounded-lg self-start hover:bg-[#1ebe5d] transition-all duration-300 flex items-center gap-2"
