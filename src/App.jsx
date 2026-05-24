@@ -155,7 +155,7 @@ const HeroSection = ({ onOpenModal }) => {
             className="text-5xl md:text-7xl font-bold text-[#3D6B4F] mb-3 leading-tight"
             style={{ fontFamily: 'Georgia, serif' }}
           >
-            Explore Northeast with Misty Horizon Holiday
+            Explore Northeast <span className='text-white'>with Misty Horizon Holiday</span>
           </motion.h1>
 
           {/* Tagline */}
