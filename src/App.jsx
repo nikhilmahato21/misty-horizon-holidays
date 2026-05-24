@@ -152,7 +152,7 @@ const HeroSection = ({ onOpenModal }) => {
           {/* Main Heading */}
           <motion.h1
             variants={heroVariants}
-            className="text-5xl md:text-7xl font-bold text-white mb-3 leading-tight"
+            className="text-5xl md:text-7xl font-bold text-[#3D6B4F] mb-3 leading-tight"
             style={{ fontFamily: 'Georgia, serif' }}
           >
             Explore Northeast with Misty Horizon Holiday
@@ -960,7 +960,7 @@ export default function App() {
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="container mx-auto px-4 py-4 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
             <div className="flex items-center gap-3">
               <img
                 src="https://res.cloudinary.com/dynbpb9u0/image/upload/v1779605655/WhatsApp_Image_2026-05-24_at_12.23.32-removebg-preview_pb4rxf.png"
@@ -968,15 +968,23 @@ export default function App() {
                 className="h-11 w-11 object-contain"
               />
               <div className="text-2xl font-bold text-[#3D6B4F]" style={{ fontFamily: 'Georgia, serif' }}>
-                Misty Horizon
+                Misty Horizon Holiday
               </div>
             </div>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="px-6 py-2 bg-[#7CB8C8] text-white font-semibold rounded-lg hover:bg-[#6BA8B8] transition-all"
+            <a
+              href="tel:+917384853108"
+              className="hidden sm:flex items-center justify-center gap-2 text-[#3D6B4F] font-semibold hover:text-[#7CB8C8] transition-colors"
             >
-              Plan Trip
-            </button>
+              <FiPhone className="w-4 h-4" /> +91 7384853108
+            </a>
+            <div className="flex justify-end">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-6 py-2 bg-[#7CB8C8] text-white font-semibold rounded-lg hover:bg-[#6BA8B8] transition-all"
+              >
+                Plan Trip
+              </button>
+            </div>
           </div>
         </motion.nav>
 
