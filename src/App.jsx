@@ -8,7 +8,7 @@ import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { useForm } from 'react-hook-form';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
-import { FiPhone, FiMail, FiMapPin, FiX, FiChevronDown } from 'react-icons/fi';
+import { FiPhone, FiMail, FiMapPin, FiX, FiChevronDown, FiMenu } from 'react-icons/fi';
 import { FaWhatsapp, FaInstagram, FaFacebook } from 'react-icons/fa';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -920,8 +920,19 @@ const FloatingWhatsAppButton = () => {
 };
 
 // ============ MAIN APP ============
+const NAV_LINKS = [
+  { label: 'Home', href: '#home' },
+  { label: 'Destinations', href: '#destinations' },
+  { label: 'Services', href: '#services' },
+  { label: 'Why Choose Us', href: '#why-us' },
+  { label: 'Guest Stories', href: '#testimonials' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'Contact', href: '#contact' },
+];
+
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     // Initialize Lenis for smooth scrolling
@@ -960,46 +971,131 @@ export default function App() {
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="container mx-auto px-4 py-4 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
-            <div className="flex items-center gap-3">
+          <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            {/* Logo + Brand */}
+            <div className="flex items-center gap-2 min-w-0">
               <img
                 src="https://res.cloudinary.com/dynbpb9u0/image/upload/v1779605655/WhatsApp_Image_2026-05-24_at_12.23.32-removebg-preview_pb4rxf.png"
                 alt="Misty Horizon Holidays logo"
-                className="h-11 w-11 object-contain"
+                className="h-8 w-8 md:h-11 md:w-11 object-contain flex-shrink-0"
               />
-              <div className="text-2xl font-bold text-[#3D6B4F]" style={{ fontFamily: 'Georgia, serif' }}>
+              <div className="text-[11px] sm:text-sm md:text-xl font-bold text-[#3D6B4F] leading-tight whitespace-nowrap" style={{ fontFamily: 'Georgia, serif' }}>
                 Misty Horizon Holiday
               </div>
             </div>
-            <a
-              href="tel:+917384853108"
-              className="hidden sm:flex items-center justify-center gap-2 text-[#3D6B4F] font-semibold hover:text-[#7CB8C8] transition-colors"
-            >
-              <FiPhone className="w-4 h-4" /> +91 7384853108
-            </a>
-            <div className="flex justify-end">
+
+            {/* Desktop nav links */}
+            <nav className="hidden md:flex items-center gap-6">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-[#3D6B4F] hover:text-[#7CB8C8] transition-colors whitespace-nowrap"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+
+            {/* Desktop right: phone + CTA */}
+            <div className="hidden md:flex items-center gap-4 flex-shrink-0">
+              <a
+                href="tel:+917384853108"
+                className="flex items-center gap-1 text-sm text-[#3D6B4F] font-medium hover:text-[#7CB8C8] transition-colors"
+              >
+                <FiPhone className="w-4 h-4" /> +91 7384853108
+              </a>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="px-6 py-2 bg-[#7CB8C8] text-white font-semibold rounded-lg hover:bg-[#6BA8B8] transition-all"
+                className="px-4 py-2 bg-[#7CB8C8] text-white text-sm font-semibold rounded-lg hover:bg-[#6BA8B8] transition-all"
               >
                 Plan Trip
               </button>
             </div>
+
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              className="md:hidden p-2 text-[#3D6B4F] flex-shrink-0"
+              aria-label="Open menu"
+            >
+              <FiMenu className="w-6 h-6" />
+            </button>
           </div>
         </motion.nav>
 
+        {/* Slide-in Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                className="fixed inset-0 bg-black/40 z-40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsMenuOpen(false)}
+              />
+              {/* Drawer */}
+              <motion.div
+                className="fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl flex flex-col"
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'tween', duration: 0.3 }}
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+                  <span className="text-lg font-bold text-[#3D6B4F]" style={{ fontFamily: 'Georgia, serif' }}>Menu</span>
+                  <button onClick={() => setIsMenuOpen(false)} className="p-1 text-gray-500 hover:text-[#3D6B4F]">
+                    <FiX className="w-6 h-6" />
+                  </button>
+                </div>
+                {/* Links */}
+                <nav className="flex flex-col px-6 py-4 gap-1 flex-1">
+                  {NAV_LINKS.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="py-3 text-base font-medium text-[#3D6B4F] border-b border-gray-50 hover:text-[#7CB8C8] transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </nav>
+                {/* CTA */}
+                <div className="px-6 py-6 border-t border-gray-100 space-y-3">
+                  <a
+                    href="tel:+917384853108"
+                    className="flex items-center gap-2 text-sm text-[#3D6B4F] font-medium"
+                  >
+                    <FiPhone className="w-4 h-4" /> +91 7384853108
+                  </a>
+                  <button
+                    onClick={() => { setIsMenuOpen(false); setIsModalOpen(true); }}
+                    className="w-full py-3 bg-[#7CB8C8] text-white font-semibold rounded-lg hover:bg-[#6BA8B8] transition-all"
+                  >
+                    Plan Trip
+                  </button>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+
         {/* Hero */}
-        <div className="pt-20">
+        <div id="home" className="pt-20">
           <HeroSection onOpenModal={() => setIsModalOpen(true)} />
         </div>
 
         {/* Sections */}
-        <DestinationsSection />
-        <ServicesSection />
-        <WhyChooseUsSection />
-        <TestimonialsSection />
-        <GallerySection />
-        <ContactSection />
+        <div id="destinations"><DestinationsSection /></div>
+        <div id="services"><ServicesSection /></div>
+        <div id="why-us"><WhyChooseUsSection /></div>
+        <div id="testimonials"><TestimonialsSection /></div>
+        <div id="gallery"><GallerySection /></div>
+        <div id="contact"><ContactSection /></div>
 
         {/* Modal */}
         <EnquiryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
