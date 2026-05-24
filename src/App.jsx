@@ -197,7 +197,7 @@ const HeroSection = ({ onOpenModal }) => {
             variants={heroVariants}
             className="text-xl md:text-2xl text-white/90 mb-8 font-light tracking-wide"
           >
-            Premium Tours • Hotel Booking • Ticket Booking
+             Tour Packages• Hotel Booking • Ticket Booking
           </motion.p>
 
           {/* CTA Buttons */}
