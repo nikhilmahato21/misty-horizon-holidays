@@ -31,6 +31,72 @@ const COLORS = {
   bgLight: '#FAFAF9',
 };
 
+const DESTINATIONS = [
+  {
+    id: 1,
+    name: 'Sikkim',
+    description: 'Experience the mystical beauty of the Himalayas with snow-capped peaks and pristine valleys',
+    attractions: ['Gangtok', 'Tsomgo Lake', 'Nathula Pass', 'Lachung', 'Yumthang Valley'],
+    bestTime: 'March - May, September - November',
+    image: 'https://images.pexels.com/photos/20323309/pexels-photo-20323309.jpeg',
+    color: 'from-[#7CB8C8]/40 to-[#8BC4D4]/40',
+  },
+  {
+    id: 2,
+    name: 'Darjeeling',
+    description: 'The land of the Toy Train, tea gardens, and breathtaking mountain vistas',
+    attractions: ['Tea Gardens', 'Tiger Hill', 'Toy Train', 'Batasia Loop'],
+    bestTime: 'October - December, March - May',
+    image: 'https://images.pexels.com/photos/103875/pexels-photo-103875.jpeg',
+    color: 'from-[#F4C46E]/40 to-[#E8B84F]/40',
+  },
+  {
+    id: 3,
+    name: 'Meghalaya',
+    description: 'The wettest place on Earth, famous for living root bridges and pristine nature',
+    attractions: ['Shillong', 'Cherrapunji', 'Dawki River', 'Living Root Bridge'],
+    bestTime: 'June - September, October - November',
+    image: 'https://images.pexels.com/photos/4233677/pexels-photo-4233677.jpeg',
+    color: 'from-[#A8B89C]/40 to-[#9AA88B]/40',
+  },
+  {
+    id: 4,
+    name: 'Assam',
+    description: 'Home to the majestic one-horned rhino and sprawling tea estates',
+    attractions: ['Kaziranga National Park', 'Tea Estates', 'Kamakhya Temple'],
+    bestTime: 'November - April',
+    image: 'https://images.pexels.com/photos/37116953/pexels-photo-37116953.jpeg',
+    color: 'from-[#3D6B4F]/40 to-[#4A7D5C]/40',
+  },
+  {
+    id: 5,
+    name: 'Arunachal Pradesh',
+    description: 'The land of the sunrise with sacred monasteries and untouched mountains',
+    attractions: ['Tawang', 'Monasteries', 'Scenic Mountains'],
+    bestTime: 'April - June, September - October',
+    image: 'https://images.unsplash.com/photo-1589808015717-a626de258af0?q=80',
+    color: 'from-[#7CB8C8]/40 to-[#8BC4D4]/40',
+  },
+  {
+    id: 6,
+    name: 'Bhutan',
+    description: 'The kingdom of gross national happiness with monasteries perched on cliffs',
+    attractions: ['Paro', 'Tiger Nest', 'Thimphu'],
+    bestTime: 'March - May, September - November',
+    image: 'https://waitbutwhy.com/wp-content/uploads/2025/11/bhutan_FEATURE-750x563.jpeg',
+    color: 'from-[#A8B89C]/40 to-[#9AA88B]/40',
+  },
+  {
+    id: 7,
+    name: 'Kashmir',
+    description: 'The crown jewel of India with stunning lakes, gardens, and snow-capped mountains',
+    attractions: ['Srinagar', 'Gulmarg', 'Pahalgam', 'Sonmarg'],
+    bestTime: 'April - June, September - November',
+    image: 'https://images.unsplash.com/photo-1598091383021-15ddea10925d?q=80',
+    color: 'from-[#F4C46E]/40 to-[#E8B84F]/40',
+  },
+];
+
 // ============ HERO SECTION ============
 const HeroSection = ({ onOpenModal }) => {
   const { ref, inView } = useInView({ threshold: 0.3, once: true });
@@ -76,7 +142,7 @@ const HeroSection = ({ onOpenModal }) => {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
 
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-16 md:py-24">
         <motion.div
           className="text-center max-w-4xl"
           variants={containerVariants}
@@ -89,7 +155,7 @@ const HeroSection = ({ onOpenModal }) => {
             className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
             style={{ fontFamily: 'Georgia, serif' }}
           >
-            Explore The Magic Of The Himalayas
+            Explore The Magic Of The North East
           </motion.h1>
 
           {/* Subheading */}
@@ -144,7 +210,7 @@ const HeroSection = ({ onOpenModal }) => {
           {/* Animated Counters */}
           <motion.div
             variants={heroVariants}
-            className="grid grid-cols-3 gap-4 md:gap-8 text-white"
+            className="grid grid-cols-3 gap-4 md:gap-8 text-white mb-12 md:mb-0"
           >
             <div className="backdrop-blur-md bg-white/10 rounded-lg p-6">
               <p className="text-4xl font-bold mb-2">
@@ -170,7 +236,7 @@ const HeroSection = ({ onOpenModal }) => {
 
       {/* Floating scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        className="absolute bottom-3 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 hidden sm:block"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
@@ -184,19 +250,29 @@ const HeroSection = ({ onOpenModal }) => {
 // ============ ENQUIRY MODAL ============
 const EnquiryModal = ({ isOpen, onClose }) => {
   const { register, handleSubmit, reset } = useForm();
-  const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = (data) => {
-    console.log('Form data:', data);
-    setSubmitted(true);
+    const message = [
+      'Hi Misty Horizon, I want to inquire about travel packages.',
+      '',
+      `Destination: ${data.destination}`,
+      `Name: ${data.name}`,
+      `Phone: ${data.phone}`,
+      `Email: ${data.email}`,
+      `Travel Month: ${data.month}`,
+      `Travel Type: ${data.travelType || 'Not specified'}`,
+      `Members: ${data.members}`,
+      `Additional Message: ${data.message || 'Not specified'}`,
+    ].join('\n');
+
+    window.open(`https://wa.me/917384853108?text=${encodeURIComponent(message)}`, '_blank');
+    reset();
     setTimeout(() => {
-      setSubmitted(false);
-      reset();
       onClose();
-    }, 2000);
+    }, 300);
   };
 
-  const destinations = ['Sikkim', 'Darjeeling', 'Meghalaya', 'Assam', 'Arunachal Pradesh', 'Bhutan', 'Kashmir'];
+  const destinations = DESTINATIONS.map((destination) => destination.name);
   const travelTypes = ['Family Tour', 'Honeymoon', 'Group Trip', 'Adventure', 'Solo Trip'];
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -242,8 +318,7 @@ const EnquiryModal = ({ isOpen, onClose }) => {
             </div>
 
             {/* Form */}
-            {!submitted ? (
-              <form onSubmit={handleSubmit(onSubmit)} className="p-4 space-y-3">
+            <form onSubmit={handleSubmit(onSubmit)} className="p-4 space-y-3">
                 {/* Destination (full width) */}
                 <div>
                   <label className="block text-xs font-semibold text-[#3D6B4F] mb-1">Destination *</label>
@@ -342,37 +417,14 @@ const EnquiryModal = ({ isOpen, onClose }) => {
                   />
                 </div>
 
-                {/* Buttons */}
-                <div className="flex gap-3">
-                  <button
-                    type="submit"
-                    className="flex-1 bg-gradient-to-r from-[#7CB8C8] to-[#8BC4D4] text-white font-bold py-2 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-sm"
-                  >
-                    Send Enquiry
-                  </button>
-                  <a
-                    href="https://wa.me/917384853108?text=Hi%20Misty%20Horizon%2C%20I%20want%20to%20inquire%20about%20travel%20packages"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 bg-[#25D366] text-white font-bold py-2 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 text-sm"
-                  >
-                    <FaWhatsapp className="w-4 h-4" /> WhatsApp
-                  </a>
-                </div>
-              </form>
-            ) : (
-              <motion.div
-                className="p-8 text-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+              {/* Button */}
+              <button
+                type="submit"
+                className="w-full bg-[#25D366] text-white font-bold py-3 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 text-sm"
               >
-                <div className="text-6xl mb-4">✓</div>
-                <h3 className="text-2xl font-bold text-[#3D6B4F] mb-2">Thank You!</h3>
-                <p className="text-gray-600">
-                  Your enquiry has been received. We'll contact you soon with personalized travel packages.
-                </p>
-              </motion.div>
-            )}
+                <FaWhatsapp className="w-4 h-4" /> Send Details On WhatsApp
+              </button>
+            </form>
           </motion.div>
         </motion.div>
       )}
@@ -382,71 +434,7 @@ const EnquiryModal = ({ isOpen, onClose }) => {
 
 // ============ DESTINATIONS SECTION ============
 const DestinationsSection = () => {
-  const destinations = [
-    {
-      id: 1,
-      name: 'Sikkim',
-      description: 'Experience the mystical beauty of the Himalayas with snow-capped peaks and pristine valleys',
-      attractions: ['Gangtok', 'Tsomgo Lake', 'Nathula Pass', 'Lachung', 'Yumthang Valley'],
-      bestTime: 'March - May, September - November',
-      image: 'https://images.pexels.com/photos/20323309/pexels-photo-20323309.jpeg',
-      color: 'from-[#7CB8C8]/40 to-[#8BC4D4]/40',
-    },
-    {
-      id: 2,
-      name: 'Darjeeling',
-      description: 'The land of the Toy Train, tea gardens, and breathtaking mountain vistas',
-      attractions: ['Tea Gardens', 'Tiger Hill', 'Toy Train', 'Batasia Loop'],
-      bestTime: 'October - December, March - May',
-      image: 'https://images.pexels.com/photos/103875/pexels-photo-103875.jpeg',
-      color: 'from-[#F4C46E]/40 to-[#E8B84F]/40',
-    },
-    {
-      id: 3,
-      name: 'Meghalaya',
-      description: 'The wettest place on Earth, famous for living root bridges and pristine nature',
-      attractions: ['Shillong', 'Cherrapunji', 'Dawki River', 'Living Root Bridge'],
-      bestTime: 'June - September, October - November',
-      image: 'https://images.pexels.com/photos/4233677/pexels-photo-4233677.jpeg',
-      color: 'from-[#A8B89C]/40 to-[#9AA88B]/40',
-    },
-    {
-      id: 4,
-      name: 'Assam',
-      description: 'Home to the majestic one-horned rhino and sprawling tea estates',
-      attractions: ['Kaziranga National Park', 'Tea Estates', 'Kamakhya Temple'],
-      bestTime: 'November - April',
-      image: 'https://images.pexels.com/photos/37116953/pexels-photo-37116953.jpeg',
-      color: 'from-[#3D6B4F]/40 to-[#4A7D5C]/40',
-    },
-    {
-      id: 5,
-      name: 'Arunachal Pradesh',
-      description: 'The land of the sunrise with sacred monasteries and untouched mountains',
-      attractions: ['Tawang', 'Monasteries', 'Scenic Mountains'],
-      bestTime: 'April - June, September - October',
-      image: 'https://images.unsplash.com/photo-1589808015717-a626de258af0?q=80',
-      color: 'from-[#7CB8C8]/40 to-[#8BC4D4]/40',
-    },
-    {
-      id: 6,
-      name: 'Bhutan',
-      description: 'The kingdom of gross national happiness with monasteries perched on cliffs',
-      attractions: ['Paro', 'Tiger Nest', 'Thimphu'],
-      bestTime: 'March - May, September - November',
-      image: 'https://waitbutwhy.com/wp-content/uploads/2025/11/bhutan_FEATURE-750x563.jpeg',
-      color: 'from-[#A8B89C]/40 to-[#9AA88B]/40',
-    },
-    {
-      id: 7,
-      name: 'Kashmir',
-      description: 'The crown jewel of India with stunning lakes, gardens, and snow-capped mountains',
-      attractions: ['Srinagar', 'Gulmarg', 'Pahalgam', 'Sonmarg'],
-      bestTime: 'April - June, September - November',
-      image: 'https://images.unsplash.com/photo-1598091383021-15ddea10925d?q=80',
-      color: 'from-[#F4C46E]/40 to-[#E8B84F]/40',
-    },
-  ];
+  const destinations = DESTINATIONS;
 
   return (
     <section className="py-20 bg-white">
@@ -756,14 +744,10 @@ const TestimonialsSection = () => {
 
 // ============ GALLERY SECTION ============
 const GallerySection = () => {
-  const images = [
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop',
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=600&fit=crop',
-  ];
+  const images = DESTINATIONS.map((destination) => ({
+    src: destination.image,
+    alt: destination.name,
+  }));
 
   return (
     <section className="py-20 bg-white">
@@ -782,9 +766,9 @@ const GallerySection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {images.map((img, idx) => (
+          {images.map((image, idx) => (
             <motion.div
-              key={idx}
+              key={image.alt}
               className="rounded-xl overflow-hidden shadow-lg h-64 cursor-pointer group"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -793,8 +777,8 @@ const GallerySection = () => {
               whileHover={{ scale: 1.08 }}
             >
               <img
-                src={img}
-                alt={`Gallery ${idx}`}
+                src={image.src}
+                alt={image.alt}
                 className="w-full h-full object-cover group-hover:brightness-110 transition-all duration-300"
               />
             </motion.div>
@@ -923,14 +907,10 @@ export default function App() {
       console.log('Lenis smooth scroll disabled');
     });
 
-    // Open modal on first visit
-    const hasVisited = localStorage.getItem('mistyHorizonVisited');
-    if (!hasVisited) {
-      setTimeout(() => {
-        setIsModalOpen(true);
-        localStorage.setItem('mistyHorizonVisited', 'true');
-      }, 1000);
-    }
+    // Open modal whenever the site loads
+    setTimeout(() => {
+      setIsModalOpen(true);
+    }, 1000);
   }, []);
 
   return (
@@ -943,7 +923,12 @@ export default function App() {
           transition={{ duration: 0.5 }}
         >
           <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <img
+                src="https://res.cloudinary.com/dynbpb9u0/image/upload/v1779605655/WhatsApp_Image_2026-05-24_at_12.23.32-removebg-preview_pb4rxf.png"
+                alt="Misty Horizon Holidays logo"
+                className="h-11 w-11 object-contain"
+              />
               <div className="text-2xl font-bold text-[#3D6B4F]" style={{ fontFamily: 'Georgia, serif' }}>
                 Misty Horizon
               </div>
