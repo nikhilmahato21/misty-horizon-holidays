@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import { FiPhone, FiMail, FiMapPin, FiX, FiChevronDown } from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaFacebook } from 'react-icons/fa';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -152,18 +152,52 @@ const HeroSection = ({ onOpenModal }) => {
           {/* Main Heading */}
           <motion.h1
             variants={heroVariants}
-            className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+            className="text-5xl md:text-7xl font-bold text-white mb-3 leading-tight"
             style={{ fontFamily: 'Georgia, serif' }}
           >
-            Explore The Magic Of The North East
+            Explore Northeast with Misty Horizon Holiday
           </motion.h1>
+
+          {/* Tagline */}
+          <motion.p
+            variants={heroVariants}
+            className="text-2xl md:text-3xl text-[#F4C46E] mb-5 font-semibold italic tracking-wide"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            More than Travels — it's a Story
+          </motion.p>
+
+          {/* Social Links */}
+          <motion.div
+            variants={heroVariants}
+            className="flex justify-center gap-4 mb-6"
+          >
+            <a
+              href="https://www.instagram.com/mistyhorizon123?igsh=aWw1ZnViZDUzMXEy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full transition-all duration-300 hover:scale-105"
+            >
+              <FaInstagram className="w-5 h-5 text-pink-300" />
+              <span className="text-sm font-medium">Instagram</span>
+            </a>
+            <a
+              href="https://www.facebook.com/share/1DmNbJFHFa/?ref=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full transition-all duration-300 hover:scale-105"
+            >
+              <FaFacebook className="w-5 h-5 text-blue-300" />
+              <span className="text-sm font-medium">Facebook</span>
+            </a>
+          </motion.div>
 
           {/* Subheading */}
           <motion.p
             variants={heroVariants}
             className="text-xl md:text-2xl text-white/90 mb-8 font-light tracking-wide"
           >
-            Premium Tours • Cab Hire • Bike & Scooty Rentals • Hotel Booking • Ticket Booking
+            Premium Tours • Hotel Booking • Ticket Booking
           </motion.p>
 
           {/* CTA Buttons */}
@@ -508,13 +542,16 @@ const DestinationsSection = () => {
                     </p>
                   </div>
 
-                  <motion.button
-                    className="bg-[#7CB8C8] text-white font-bold py-3 px-6 rounded-lg self-start hover:bg-[#6BA8B8] transition-all duration-300"
+                  <motion.a
+                    href={`https://wa.me/917384853108?text=${encodeURIComponent(`Hi Misty Horizon, I'm interested in exploring ${dest.name}. Please share package details and pricing.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#25D366] text-white font-bold py-3 px-6 rounded-lg self-start hover:bg-[#1ebe5d] transition-all duration-300 flex items-center gap-2"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    Explore Package →
-                  </motion.button>
+                    <FaWhatsapp className="w-5 h-5" /> Explore Package →
+                  </motion.a>
                 </div>
               </div>
             </motion.div>
@@ -535,9 +572,6 @@ const ServicesSection = () => {
     { icon: '🏜️', title: 'Arunachal Tours', desc: 'Land of the sunrise adventure' },
     { icon: '🏛️', title: 'Bhutan Tours', desc: 'Happiness kingdom exploration' },
     { icon: '❄️', title: 'Kashmir Packages', desc: 'Paradise on Earth experience' },
-    { icon: '🚕', title: 'Cab Hire', desc: 'Premium vehicle rental services' },
-    { icon: '🏍️', title: 'Bike Hire', desc: 'Adventure bike rentals' },
-    { icon: '🛵', title: 'Scooty Hire', desc: 'Budget-friendly scooty rentals' },
     { icon: '🏨', title: 'Hotel Booking', desc: 'Premium accommodation options' },
     { icon: '🎫', title: 'Ticket Booking', desc: 'Flight, train, cable car tickets' },
   ];
@@ -744,10 +778,14 @@ const TestimonialsSection = () => {
 
 // ============ GALLERY SECTION ============
 const GallerySection = () => {
-  const images = DESTINATIONS.map((destination) => ({
-    src: destination.image,
-    alt: destination.name,
-  }));
+  const images = [
+    ...DESTINATIONS.map((destination) => ({
+      src: destination.image,
+      alt: destination.name,
+    })),
+    { src: 'https://res.cloudinary.com/dynbpb9u0/image/upload/v1779617085/WhatsApp_Image_2026-05-24_at_14.43.51_xn1vlv.jpg', alt: 'Misty Horizon Travel' },
+    { src: 'https://res.cloudinary.com/dynbpb9u0/image/upload/v1779617085/WhatsApp_Image_2026-05-24_at_14.43.51_1_uaam2p.jpg', alt: 'Misty Horizon Journey' },
+  ];
 
   return (
     <section className="py-20 bg-white">
