@@ -466,6 +466,69 @@ const EnquiryModal = ({ isOpen, onClose }) => {
   );
 };
 
+// ============ ABOUT SECTION ============
+const AboutSection = () => {
+  return (
+    <section className="py-20 bg-gradient-to-b from-white to-[#FAFAF9]">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl font-bold text-[#3D6B4F] mb-4" style={{ fontFamily: 'Georgia, serif' }}>
+              About Us
+            </h2>
+            <div className="w-16 h-1 bg-[#F4C46E] mx-auto rounded-full" />
+          </motion.div>
+
+          <motion.div
+            className="bg-white rounded-3xl shadow-xl overflow-hidden"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              {/* Image side */}
+              <div className="relative h-72 md:h-auto overflow-hidden">
+                <img
+                  src="https://images.pexels.com/photos/20323309/pexels-photo-20323309.jpeg"
+                  alt="Misty Horizon Holidays"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#3D6B4F]/60 to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white">
+                  <p className="text-3xl font-bold" style={{ fontFamily: 'Georgia, serif' }}>5000+</p>
+                  <p className="text-sm opacity-90">Happy Travelers</p>
+                </div>
+              </div>
+
+              {/* Text side */}
+              <div className="p-8 md:p-12 flex flex-col justify-center">
+                <p className="text-gray-700 text-lg leading-relaxed mb-6">
+                  Misty Horizon Holidays is your trusted travel partner for unforgettable journeys across <span className="font-semibold text-[#3D6B4F]">Sikkim, Darjeeling, Meghalaya, Bhutan,</span> and North East India.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  We specialize in customized tour packages, honeymoon trips, adventure holidays, group tours, and nature getaways. Our team ensures comfort, safety, and local experiences that turn every trip into a story. From serene hills to vibrant valleys — we help you explore destinations with heart.
+                </p>
+                <div className="border-l-4 border-[#F4C46E] pl-4">
+                  <p className="text-[#3D6B4F] font-semibold italic text-lg" style={{ fontFamily: 'Georgia, serif' }}>
+                    ✨ More than travels — it's a story waiting to unfold.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // ============ DESTINATIONS SECTION ============
 const DestinationsSection = () => {
   const destinations = DESTINATIONS;
@@ -922,6 +985,7 @@ const FloatingWhatsAppButton = () => {
 // ============ MAIN APP ============
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
   { label: 'Destinations', href: '#destinations' },
   { label: 'Services', href: '#services' },
   { label: 'Why Choose Us', href: '#why-us' },
@@ -1090,6 +1154,7 @@ export default function App() {
         </div>
 
         {/* Sections */}
+        <div id="about"><AboutSection /></div>
         <div id="destinations"><DestinationsSection /></div>
         <div id="services"><ServicesSection /></div>
         <div id="why-us"><WhyChooseUsSection /></div>
